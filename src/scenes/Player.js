@@ -1,3 +1,4 @@
+import StarCounter from "./StarCounter";
 
 class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey) {
@@ -5,10 +6,12 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
         this.vecolidade = 200;
         this.scene = scene;
         this.scene.physics.world.enable(this);
-        this.setCollideWorldBounds(true);
+        // this.setCollideWorldBounds(true);
         this.setDepth(1);
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.starCounter = new StarCounter(this.scene, 480, 290);
+
     }
 
     createAnimations() {

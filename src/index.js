@@ -15,12 +15,12 @@ const config = {
         mode: Phaser.Scale.FIT,
         // parent: 'phaser-example',
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 800,
-        height: 600,
+        width: 1024,
+        height: 720,
     },
     // parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 720,
     scene: [PlayScene],
 };
 
