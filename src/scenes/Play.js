@@ -22,6 +22,7 @@ class PlayScene extends Phaser.Scene {
     }
 
     create() {
+        console.log("teste");
         this.add.image(game.config.width / 2, game.config.height / 2, "sky");
 
         this.player = new PlayerClass(this, 500, 100, 'player');
