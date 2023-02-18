@@ -34,6 +34,7 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     move(cursors) {
+        console.log("move");
         if (cursors.left.isDown) {
             this.setVelocityX(-this.vecolidade);
             this.anims.play('left', true);
