@@ -21,7 +21,7 @@ class PlatformClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     onCollision(platform, player) {
-        console.log("🚀 ~ file: Platform.js:22 ~ PlatformClass ~ onCollision ~ platform", platform)
+        // console.log("🚀 ~ file: Platform.js:22 ~ PlatformClass ~ onCollision ~ platform", platform)
         if (platform.name == "house") {
             // Generate a random x and y position for the star
             const x = Phaser.Math.Between(100, 300);
