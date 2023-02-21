@@ -1,4 +1,4 @@
-import StarClass from "./Star";
+import PackageClass from "./Package";
 class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey) {
         super(scene, x, y, spriteKey);
@@ -59,33 +59,55 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire(cursors, scene) {
-        if (cursors.space.isDown) {
-            const star = scene.stars.get(scene.player.x, scene.player.y);
-            // const star = new StarClass(scene, scene.player.x, scene.player.y);
-            if (star) {
-                star.setActive(true);
-                star.setVisible(true);
-                star.body.enable = true;
-                // Set the velocity of the star based on the player's direction
+        console.log("🚀 ~ file: Player.js:62 ~ PlayerClass ~ fire ~ scene", scene)
+        if (cursors.space.isDown && !this.spaceKeyPressed && scene.packageCounter.packageCount > 0) {
+            this.spaceKeyPressed = true;
+            // let pack = scene.packages.get(scene.player.x, scene.player.y);
+            let pack = new PackageClass(scene, scene.player.x - 10, scene.player.y);
+            if (pack) {
+                // pack.setActive(true);
+                // pack.setVisible(true);
+                // pack.body.enable = true;
+
+                // Set the velocity of the pack based on the player's direction
                 const velocity = 500;
-                if (scene.player.anims.currentAnim.key === 'left') {
-                    console.log(`AA`);
-                    star.setVelocityX(-velocity * 2);
-                } else if (scene.player.anims.currentAnim.key === 'right') {
-                    console.log(`BB`);
-                    star.setVelocityX(velocity * 2);
-                } else if (scene.player.anims.currentAnim.key === 'up') {
-                    console.log(`CC`);
-                    star.setVelocityY(-velocity * 2);
-                } else if (scene.player.anims.currentAnim.key === 'down') {
-                    console.log(`DD`);
-                    star.setVelocityY(velocity * 2);
+                if (cursors.left.isDown) {
+                    if (cursors.up.isDown) {
+                        pack.setVelocity(-velocity, -velocity);
+                    } else if (cursors.down.isDown) {
+                        pack.setVelocity(-velocity, velocity);
+                    } else {
+                        pack.setVelocity(-velocity * 0.5, 10);
+                    }
+                } else if (cursors.right.isDown) {
+                    if (cursors.up.isDown) {
+                        pack.setVelocity(velocity, -velocity);
+                    } else if (cursors.down.isDown) {
+                        pack.setVelocity(velocity, velocity);
+                    } else {
+                        pack.setVelocity(velocity * 0.5, 10);
+                    }
+                } else if (cursors.up.isDown) {
+                    pack.setVelocity(0, -velocity * 0.5, 10);
+                } else if (cursors.down.isDown) {
+                    pack.setVelocity(0, velocity * 0.5, 10);
                 }
-                // Destroy the star if it goes out of bounds
-                star.checkWorldBounds = true;
-                star.outOfBoundsKill = true;
+                pack.setAngularVelocity(500);
+                pack.setAngle(100)
+                pack.setOffset(-pack.width/2, -pack.height/2);
+                // pack.setAngularAcceleration(100);
+                // Set the circle collision bounds for the pack
+                // pack.setCircle(10, 5, 5);
+                scene.packageCounter.decrement();
+                // Destroy the pack after 2 seconds
+                // scene.time.delayedCall(500, () => {
+                //     pack.destroy();
+                // });
             }
+        } else if (cursors.space.isUp && this.spaceKeyPressed) {
+            this.spaceKeyPressed = false;
         }
+
     }
 }
 

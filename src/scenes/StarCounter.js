@@ -8,18 +8,24 @@ class StarCounter extends Phaser.GameObjects.Text {
         this.scrollFactorY = 0;
         this.setDepth(1);
         // Initialize the star count to zero
-        this.starCount = 0;
+        this.starCount = 100;
         this.setText(`Pacote:${this.starCount}`);
 
     }
 
     // Method to increment the star count and update the text
     increment() {
-        console.log("STAR: ", this.starCount);
         this.starCount += 1;
         this.setText(`Pacotes:${this.starCount}`);
-
     }
+
+    decrement() {
+        if (this.starCount > 0) {
+            this.starCount -= 1;
+            this.setText(`Pacotes:${this.starCount}`);     
+        }
+    }
+
 }
 
 export default StarCounter;

@@ -1,4 +1,5 @@
 import StarClass from "./Star";
+import PackageClass from "./Package";
 
 class PlatformClass extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, key) {
@@ -21,14 +22,13 @@ class PlatformClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     onCollision(platform, player) {
-        // console.log("🚀 ~ file: Platform.js:22 ~ PlatformClass ~ onCollision ~ platform", platform)
-        if (platform.name == "house") {
+        if (platform.name == "shop") {
             // Generate a random x and y position for the star
             const x = Phaser.Math.Between(100, 300);
             const y = Phaser.Math.Between(100, 300);
 
             // Create the star at the random position
-            new StarClass(platform.scene, x, y);
+            new PackageClass(platform.scene, x, y);
         }
         // this.scene.player.body.velocity.y = -400;
         // this.scene.player.setVelocidade(500);
