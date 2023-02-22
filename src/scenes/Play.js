@@ -51,17 +51,17 @@ class PlayScene extends Phaser.Scene {
             runChildUpdate: false,
         });
 
-        this.physics.add.collider(this.packs, this.platforms, (pack, enemy) => {
-            pack.disableBody(true, true);
-            enemy.destroy();
-        });
+        // this.physics.add.collider(this.packs, this.platforms, (pack, enemy) => {
+        //     pack.disableBody(true, true);
+        //     enemy.destroy();
+        // });
         
         // Add each platform to the scene
         this.platforms.forEach(platform => {
             this.add.existing(platform);
         });
 
-        // this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.collider(this.player, this.platforms);
     }
     update() {
         this.player.move(this.cursors);

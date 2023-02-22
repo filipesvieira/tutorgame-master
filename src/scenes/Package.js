@@ -28,8 +28,15 @@ class PackageClass extends Phaser.Physics.Arcade.Sprite {
         pack.destroy();
     }
     onCollisionPlatforms(pack, platform) {
-        console.log("🚀 ~ file: Star.js:28 ~ PackageClass ~ onCollisionPlatforms ~ platform", platform)
-        pack.destroy();
+        if (platform.name === undefined) {
+            console.log(`nao faz nada`);
+            pack.body.allowRotation = false; // adiciona o efeito de bounce
+            const vector = new Phaser.Math.Vector2();
+            vector.set(pack.x * 10, pack.y * 29);  // define as coordenadas para (x, y)
+            pack.body.bounce = vector;
+        } else {
+            pack.destroy();
+        }
     }
 
 }

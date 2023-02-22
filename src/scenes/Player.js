@@ -34,7 +34,6 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     move(cursors) {
-        console.log("move");
         if (cursors.left.isDown) {
             this.setVelocityX(-this.vecolidade);
             this.anims.play('left', true);
@@ -59,7 +58,6 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire(cursors, scene) {
-        console.log("🚀 ~ file: Player.js:62 ~ PlayerClass ~ fire ~ scene", scene)
         if (cursors.space.isDown && !this.spaceKeyPressed && scene.packageCounter.packageCount > 0) {
             this.spaceKeyPressed = true;
             // let pack = scene.packages.get(scene.player.x, scene.player.y);
