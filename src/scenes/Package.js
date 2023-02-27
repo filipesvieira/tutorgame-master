@@ -14,9 +14,6 @@ class PackageClass extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
         this.body.immovable = true;
         this.body.moves = true;
-        this.on('changedata-rotation', function(){
-            this.body.rotation = Phaser.Math.DegToRad(this.angle);
-          }, this);
         // Add the pack to the scene
         this.scene.add.existing(this);
         this.scene.physics.add.collider(this, this.scene.player, this.onCollisionPlayer, null, this);

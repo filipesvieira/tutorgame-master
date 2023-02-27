@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import { SkyImg, PlayerImg, PlatformImg, StarImg, ShopImg, PackageImg } from "../assets/";
 import PlayerClass from "./Player";
 import PlatformClass from "./Platform";
+import HealthBar from "./HealthBar";
+import Enemy from "./Enemy";
 // import StarCounter from "./StarCounter";
 // import StarClass from "./Star";
 import PackageCounter from "./PackageCounter";
@@ -24,6 +26,12 @@ class PlayScene extends Phaser.Scene {
             // startFrame: 4,
             // endFrame: 3
         });
+        this.load.spritesheet('enemy', PlayerImg, {
+            frameWidth: 32,
+            frameHeight: 48,
+            // startFrame: 4,
+            // endFrame: 3
+        });
 
 
     }
@@ -32,9 +40,14 @@ class PlayScene extends Phaser.Scene {
         this.add.image(game.config.width / 2, game.config.height / 2, "sky").setScale(3);
         this.physics.world.setBounds(0, 0, 1024, 720);
         this.player = new PlayerClass(this, 500, 100, 'player').setScale(2);
+        this.enemy = new Enemy(this, 100, 100, 100, 200);
+        this.add.existing(this.enemy);
+        this.healthBar = new HealthBar(this, 10, 10, 200, 20, this.player.vida);
+
         this.packageCounter = new PackageCounter(this, 475, 290);
 
         this.player.createAnimations();
+        this.enemy.createAnimationsEnemy();
         this.cameras.main.startFollow(this.player);
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -66,6 +79,8 @@ class PlayScene extends Phaser.Scene {
     update() {
         this.player.move(this.cursors);
         this.player.fire(this.cursors, this);
+        this.enemy.target = this.player.body.position;
+        this.enemy.update();
     }
 }
 

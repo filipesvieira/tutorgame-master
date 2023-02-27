@@ -3,6 +3,7 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey) {
         super(scene, x, y, spriteKey);
         this.vecolidade = 200;
+        this.vida = 50;
         this.scene = scene;
         this.scene.physics.world.enable(this);
         // this.setCollideWorldBounds(true);
@@ -53,12 +54,22 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    aumentarVida(pontos) {
+        this.vida = this.vida + pontos;
+    }
+
+    diminuirVida(pontos, scene) {
+        this.vida = this.vida - pontos;
+
+    }
+
     setVelocidade(velocidade) {
         this.vecolidade = this.vecolidade + velocidade;
     }
 
     fire(cursors, scene) {
         if (cursors.space.isDown && !this.spaceKeyPressed && scene.packageCounter.packageCount > 0) {
+            scene.healthBar.decrease(1, scene)
             this.spaceKeyPressed = true;
             // let pack = scene.packages.get(scene.player.x, scene.player.y);
             let pack = new PackageClass(scene, scene.player.x - 10, scene.player.y);
@@ -92,7 +103,7 @@ class PlayerClass extends Phaser.Physics.Arcade.Sprite {
                 }
                 pack.setAngularVelocity(500);
                 pack.setAngle(100)
-                pack.setOffset(-pack.width/2, -pack.height/2);
+                pack.setOffset(-pack.width / 2, -pack.height / 2);
                 // pack.setAngularAcceleration(100);
                 // Set the circle collision bounds for the pack
                 // pack.setCircle(10, 5, 5);
